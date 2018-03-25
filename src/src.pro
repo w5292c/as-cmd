@@ -10,7 +10,13 @@ PKGCONFIG += libwbxml2 libxml-2.0
 LIBS += -lreadline
 INCLUDEPATH += /usr/include/readline
 
-HEADERS=
+HEADERS=\
+  cmd-options.h \
+  rl-controller.h \
+  cmd-controller.h
 
 SOURCES=\
-  main.cpp
+  main.cpp \
+  cmd-options.cpp \
+  rl-controller.cpp \
+  cmd-controller.cpp
