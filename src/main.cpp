@@ -7,8 +7,6 @@
 namespace {
 char *TheUserName = NULL;
 char *TheUserPassword = NULL;
-
-void showHelp();
 }
 
 int main(int argc, char **argv)
@@ -16,9 +14,9 @@ int main(int argc, char **argv)
   QCoreApplication application(argc, argv);
   qDebug() << "Starting application";
 
-  QCmdController *const commander = new QCmdController();
-
   QRlController *const controller = new QRlController();
+  QCmdController *const commander = new QCmdController(controller);
+
   QObject::connect(controller, &QRlController::finished, commander, &QObject::deleteLater);
   QObject::connect(controller, &QRlController::finished, controller, &QObject::deleteLater);
   QObject::connect(controller, &QRlController::finished, &application, &QCoreApplication::quit);
@@ -37,15 +35,6 @@ int main(int argc, char **argv)
     }
     add_history(line);
 
-    if (!strcmp(line, "help")) {
-      showHelp();
-      free(line);
-      continue;
-    }
-
-    /* Debug output */
-    qDebug("Here is the user input: \"%s\"", line);
-
     /* Cleanup */
     free(line);
   } while (true);
@@ -57,13 +46,4 @@ int main(int argc, char **argv)
   free(TheUserName);
   free(TheUserPassword);
   return res;
-}
-
-namespace {
-void showHelp()
-{
-  qDebug() << ">>> help - Show help";
-  qDebug() << ">>> exit - Exit the application";
-}
-
 }

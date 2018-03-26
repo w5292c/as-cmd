@@ -3,16 +3,19 @@
 
 #include <QObject>
 
+class QRlController;
 class QCmdController : public QObject
 {
   Q_OBJECT
 
 public:
-  QCmdController();
+  QCmdController(QRlController *rl);
 
 public slots:
   void onCommand(const QString &cmd);
 
+private:
+  QRlController *mRlController;
 };
 
 #endif /* CMD_CONTROLLER_H */

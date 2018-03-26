@@ -10,6 +10,9 @@ class QRlController : public QThread
 public:
   QRlController();
 
+public slots:
+  void onCommandDone();
+
 protected:
   void run() Q_DECL_OVERRIDE;
 

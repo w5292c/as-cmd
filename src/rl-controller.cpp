@@ -26,5 +26,12 @@ void QRlController::run()
 
     /* Cleanup */
     free(line);
+
+    exec();
   } while (true);
+}
+
+void QRlController::onCommandDone()
+{
+  exit(0);
 }

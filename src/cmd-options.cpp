@@ -6,4 +6,6 @@ QCmdOptions::QCmdOptions()
 
 void QCmdOptions::execute()
 {
+
+  emit finished();
 }

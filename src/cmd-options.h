@@ -1,17 +1,17 @@
 #ifndef CMD_OPTIONS_H
 #define CMD_OPTIONS_H
 
-#include <QObject>
+#include <cmd-base.h>
 
-class QCmdOptions : public QObject
+class QCmdOptions : public QCmdBase
 {
   Q_OBJECT
 
 public:
   QCmdOptions();
 
-public slots:
-  void execute();
+protected:
+  void execute() Q_DECL_OVERRIDE;
 
 };
 
