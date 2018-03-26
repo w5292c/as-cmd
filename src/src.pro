@@ -2,6 +2,7 @@ TEMPLATE=app
 
 QT -= gui
 QT += core
+QT += network
 
 CONFIG += link_pkgconfig
 
@@ -16,7 +17,8 @@ HEADERS=\
   cmd-options.h \
   cmd-unknown.h \
   rl-controller.h \
-  cmd-controller.h
+  cmd-controller.h \
+  network-manager.h
 
 SOURCES=\
   main.cpp \
@@ -25,4 +27,5 @@ SOURCES=\
   cmd-options.cpp \
   cmd-unknown.cpp \
   rl-controller.cpp \
-  cmd-controller.cpp
+  cmd-controller.cpp \
+  network-manager.cpp

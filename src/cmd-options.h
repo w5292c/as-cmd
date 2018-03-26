@@ -3,6 +3,7 @@
 
 #include <cmd-base.h>
 
+class QNetworkReply;
 class QCmdOptions : public QCmdBase
 {
   Q_OBJECT
@@ -11,8 +12,10 @@ public:
   QCmdOptions();
 
 protected:
-  void execute() Q_DECL_OVERRIDE;
+  void run() Q_DECL_OVERRIDE;
 
+private:
+  QNetworkReply *mReply;
 };
 
 #endif /* CMD_OPTIONS_H */
