@@ -5,7 +5,9 @@
 #include "cmd-options.h"
 #include "cmd-unknown.h"
 #include "cmd-verbose.h"
+#include "cmd-sync-key.h"
 #include "rl-controller.h"
+#include "cmd-folder-sync.h"
 
 #include <history.h>
 #include <readline.h>
@@ -30,11 +32,18 @@ void QCmdController::onCommand(const QString &cmd)
     command = new QCmdHelp();
   } else if (cmd == "options") {
     command = new QCmdOptions();
+  } else if (cmd == "folder-sync") {
+    command = new QCmdFolderSync();
   } else if (cmd == "verbose") {
     command = new QCmdVerbose(true);
   } else if (cmd.startsWith("verbose ")) {
     const bool on = (cmd.mid(8) == "on");
     command = new QCmdVerbose(false, on);
+  } else if (cmd == "sync-key") {
+    command = new QCmdSyncKey(true);
+  } else if (cmd.startsWith("sync-key ")) {
+    const int value = cmd.mid(9).toInt();
+    command = new QCmdSyncKey(false, value);
   } else {
     command = new QCmdUnknown();
   }

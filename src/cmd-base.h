@@ -21,6 +21,7 @@ signals:
 protected:
   virtual void process() = 0;
   void run() Q_DECL_OVERRIDE;
+  void dumpWbXml(const QByteArray &wbxml);
 
 protected:
   QNetworkAccessManager mManager;

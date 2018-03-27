@@ -12,10 +12,14 @@ public:
   static void init(QObject *parent);
   static QAsEnvironment &instance();
 
+  int syncKey() const;
+  void setSyncKey(int key);
+
 private:
   QAsEnvironment(QObject *parent);
 
 private:
+  int mSyncKey;
 };
 
 bool verbose();

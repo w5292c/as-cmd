@@ -22,7 +22,8 @@ QAsEnvironment &QAsEnvironment::instance()
 }
 
 QAsEnvironment::QAsEnvironment(QObject *parent) :
-  QObject(parent)
+  QObject(parent),
+  mSyncKey(0)
 {
   qVerbose(<< "[QAsEnvironment::QAsEnvironment]" << TheAsEnvironment);
 }
@@ -40,4 +41,14 @@ bool verbose()
 void setVerbose(bool enable)
 {
   TheVerbose = enable;
+}
+
+int QAsEnvironment::syncKey() const
+{
+  return mSyncKey;
+}
+
+void QAsEnvironment::setSyncKey(int key)
+{
+  mSyncKey = key;
 }
