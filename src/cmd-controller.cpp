@@ -32,6 +32,7 @@
 #include "cmd-sync-key.h"
 #include "rl-controller.h"
 #include "cmd-folder-sync.h"
+#include "cmd-collection-id.h"
 
 #include <history.h>
 #include <readline.h>
@@ -68,6 +69,11 @@ void QCmdController::onCommand(const QString &cmd)
   } else if (cmd.startsWith("sync-key ")) {
     const int value = cmd.mid(9).toInt();
     command = new QCmdSyncKey(false, value);
+  } else if (cmd == "collection-id") {
+    command = new QCmdCollectionId(true);
+  } else if (cmd.startsWith("collection-id ")) {
+    const int value = cmd.mid(14).toInt();
+    command = new QCmdCollectionId(false, value);
   } else {
     command = new QCmdUnknown();
   }

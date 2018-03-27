@@ -44,7 +44,8 @@ HEADERS=\
   rl-controller.h \
   cmd-controller.h \
   network-manager.h \
-  cmd-folder-sync.h
+  cmd-folder-sync.h \
+  cmd-collection-id.h
 
 SOURCES=\
   main.cpp \
@@ -58,4 +59,5 @@ SOURCES=\
   rl-controller.cpp \
   cmd-controller.cpp \
   network-manager.cpp \
-  cmd-folder-sync.cpp
+  cmd-folder-sync.cpp \
+  cmd-collection-id.cpp

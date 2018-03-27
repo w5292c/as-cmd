@@ -22,68 +22,32 @@
  * SOFTWARE.
  */
 
+#include "cmd-collection-id.h"
+
 #include "as-env.h"
 
-#include <as-debug.h>
+#include "as-debug.h"
 
-#include <assert.h>
-
-static bool TheVerbose = false;
-static QAsEnvironment *TheAsEnvironment = NULL;
-
-void QAsEnvironment::init(QObject *parent)
+QCmdCollectionId::QCmdCollectionId(bool show, int value) :
+  mShow(show),
+  mValue(value)
 {
-  assert(!TheAsEnvironment);
-
-  TheAsEnvironment = new QAsEnvironment(parent);
+  qVerbose(<< "[QCmdCollectionId::QCmdCollectionId]" << this);
 }
 
-QAsEnvironment &QAsEnvironment::instance()
+QCmdCollectionId::~QCmdCollectionId()
 {
-  assert(TheAsEnvironment);
-
-  return *TheAsEnvironment;
+  qVerbose(<< "[QCmdCollectionId::~QCmdCollectionId]" << this);
 }
 
-QAsEnvironment::QAsEnvironment(QObject *parent) :
-  QObject(parent),
-  mSyncKey(0),
-  mCollectionId(0)
+void QCmdCollectionId::process()
 {
-  qVerbose(<< "[QAsEnvironment::QAsEnvironment]" << TheAsEnvironment);
-}
+  if (mShow) {
+    qDebug() << ">>> CollectionId:" << QAsEnvironment::instance().collectionId();
+  } else {
+    QAsEnvironment::instance().setCollectionId(mValue);
+    qDebug() << ">>> CollectionId:" << QAsEnvironment::instance().collectionId();
+  }
 
-QAsEnvironment::~QAsEnvironment()
-{
-  qVerbose(<< "[QAsEnvironment::~QAsEnvironment]" << this);
-}
-
-bool verbose()
-{
-  return TheVerbose;
-}
-
-void setVerbose(bool enable)
-{
-  TheVerbose = enable;
-}
-
-int QAsEnvironment::syncKey() const
-{
-  return mSyncKey;
-}
-
-void QAsEnvironment::setSyncKey(int key)
-{
-  mSyncKey = key;
-}
-
-int QAsEnvironment::collectionId() const
-{
-  return mCollectionId;
-}
-
-void QAsEnvironment::setCollectionId(int value)
-{
-  mCollectionId = value;
+  emit done();
 }

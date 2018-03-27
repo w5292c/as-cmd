@@ -22,68 +22,25 @@
  * SOFTWARE.
  */
 
-#include "as-env.h"
+#ifndef CMD_COLLECTION_ID_H
+#define CMD_COLLECTION_ID_H
 
-#include <as-debug.h>
+#include <cmd-base.h>
 
-#include <assert.h>
-
-static bool TheVerbose = false;
-static QAsEnvironment *TheAsEnvironment = NULL;
-
-void QAsEnvironment::init(QObject *parent)
+class QCmdCollectionId : public QCmdBase
 {
-  assert(!TheAsEnvironment);
+  Q_OBJECT
 
-  TheAsEnvironment = new QAsEnvironment(parent);
-}
+public:
+  QCmdCollectionId(bool show, int value = 0);
+  ~QCmdCollectionId() Q_DECL_OVERRIDE;
 
-QAsEnvironment &QAsEnvironment::instance()
-{
-  assert(TheAsEnvironment);
+protected:
+  void process() Q_DECL_OVERRIDE;
 
-  return *TheAsEnvironment;
-}
+private:
+  bool mShow;
+  int mValue;
+};
 
-QAsEnvironment::QAsEnvironment(QObject *parent) :
-  QObject(parent),
-  mSyncKey(0),
-  mCollectionId(0)
-{
-  qVerbose(<< "[QAsEnvironment::QAsEnvironment]" << TheAsEnvironment);
-}
-
-QAsEnvironment::~QAsEnvironment()
-{
-  qVerbose(<< "[QAsEnvironment::~QAsEnvironment]" << this);
-}
-
-bool verbose()
-{
-  return TheVerbose;
-}
-
-void setVerbose(bool enable)
-{
-  TheVerbose = enable;
-}
-
-int QAsEnvironment::syncKey() const
-{
-  return mSyncKey;
-}
-
-void QAsEnvironment::setSyncKey(int key)
-{
-  mSyncKey = key;
-}
-
-int QAsEnvironment::collectionId() const
-{
-  return mCollectionId;
-}
-
-void QAsEnvironment::setCollectionId(int value)
-{
-  mCollectionId = value;
-}
+#endif /* CMD_COLLECTION_ID_H */

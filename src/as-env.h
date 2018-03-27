@@ -38,12 +38,15 @@ public:
 
   int syncKey() const;
   void setSyncKey(int key);
+  int collectionId() const;
+  void setCollectionId(int value);
 
 private:
   QAsEnvironment(QObject *parent);
 
 private:
   int mSyncKey;
+  int mCollectionId;
 };
 
 bool verbose();
