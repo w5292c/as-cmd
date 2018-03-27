@@ -13,12 +13,14 @@ public:
   ~QCmdBase();
 
 public slots:
-  void onRequestReady(QNetworkReply *reply);
   void authentication(QNetworkReply *reply, QAuthenticator *authenticator);
 
 signals:
-  void started();
-  void finished();
+  void done();
+
+protected:
+  virtual void process() = 0;
+  void run() Q_DECL_OVERRIDE;
 
 protected:
   QNetworkAccessManager mManager;

@@ -8,12 +8,11 @@ QCmdUnknown::QCmdUnknown()
 {
 }
 
-void QCmdUnknown::run()
+void QCmdUnknown::process()
 {
   qDebug() << "Error: unknown command";
 
   QCmdHelp *cmd = new QCmdHelp();
-  connect(cmd, &QCmdHelp::finished, this, &QCmdUnknown::finished);
-  connect(cmd, &QCmdHelp::finished, cmd, &QCmdHelp::deleteLater);
+  connect(cmd, &QCmdHelp::finished, this, &QCmdUnknown::done);
   cmd->start();
 }

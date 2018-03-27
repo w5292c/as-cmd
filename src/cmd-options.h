@@ -10,9 +10,13 @@ class QCmdOptions : public QCmdBase
 
 public:
   QCmdOptions();
+  ~QCmdOptions();
 
 protected:
-  void run() Q_DECL_OVERRIDE;
+  void process() Q_DECL_OVERRIDE;
+
+protected slots:
+  void onRequestFinished();
 
 private:
   QNetworkReply *mReply;

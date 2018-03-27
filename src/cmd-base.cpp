@@ -1,6 +1,5 @@
 #include "cmd-base.h"
 
-#include <QDebug>
 #include <QNetworkReply>
 #include <QAuthenticator>
 #include <QProcessEnvironment>
@@ -10,36 +9,30 @@ QCmdBase::QCmdBase()
   mManager.moveToThread(this);
   mManager.clearAccessCache();
 
-  connect(&mManager, &QNetworkAccessManager::finished,
-          this, &QCmdBase::onRequestReady);
   connect(&mManager, &QNetworkAccessManager::authenticationRequired,
           this, &QCmdBase::authentication);
+  connect(this, &QCmdBase::done, this, &QCmdBase::quit);
+  connect(this, &QCmdBase::finished, this, &QCmdBase::deleteLater);
 }
 
 QCmdBase::~QCmdBase()
 {
 }
 
-void QCmdBase::onRequestReady(QNetworkReply *reply)
+void QCmdBase::run()
 {
-//  qDebug() << "Done";
-//  qDebug() << "Response:" << reply;
-  qDebug() << "Error:" << reply->error();
-  const QByteArray &body = reply->readAll();
-  qDebug() << "Here is the reply:" << body;
+  process();
 
-  emit finished();
+  exec();
 }
 
 void QCmdBase::authentication(QNetworkReply *reply, QAuthenticator *authenticator)
 {
-//  qDebug() << "Hello";
-//  qDebug() << "[QCmdBase::authentication]: " << reply << ", " << authenticator;
+  (void)reply;
 
   const QProcessEnvironment &env = QProcessEnvironment::systemEnvironment();
   const QString &userId = env.value("MY_USER", "<user>");
   const QString &passwd = env.value("MY_PASS", "<password>");
-  qDebug() << "Here is it:" << userId << "," << passwd;
   authenticator->setUser(userId);
   authenticator->setPassword(passwd);
 }

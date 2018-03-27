@@ -11,7 +11,7 @@ public:
   QCmdHelp();
 
 protected:
-  void run() Q_DECL_OVERRIDE;
+  void process() Q_DECL_OVERRIDE;
 
 };
 

@@ -6,10 +6,11 @@ QCmdHelp::QCmdHelp()
 {
 }
 
-void QCmdHelp::run()
+void QCmdHelp::process()
 {
   qDebug() << ">>> help - Show help";
   qDebug() << ">>> exit - Exit the application";
+  qDebug() << ">>> options - Send 'OPTIONS' request";
 
-  emit finished();
+  emit done();
 }

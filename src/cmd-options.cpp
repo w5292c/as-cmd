@@ -3,6 +3,7 @@
 #include "network-manager.h"
 
 #include <QUrl>
+#include <assert.h>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QProcessEnvironment>
@@ -14,40 +15,54 @@ QCmdOptions::QCmdOptions() :
 {
 }
 
-void QCmdOptions::run()
+QCmdOptions::~QCmdOptions()
+{
+}
+
+void QCmdOptions::process()
 {
   if (mReply) {
     qDebug() << "Error: OPTIONS is busy";
-    emit finished();
+    emit done();
     return;
   }
 
   const QProcessEnvironment &env = QProcessEnvironment::systemEnvironment();
-  const QString &serverAddress = env.value("MY_ADDR", "exchange-server.com");
+  const QString &userId = env.value("MY_USER", "<user>");
   const QString &serverPort = env.value("MY_PORT", "443");
-  const QUrl &serverUrl = QUrl(QLatin1String("https://") + serverAddress + ":" + serverPort + "/Microsoft-Server-ActiveSync");
-  qDebug() << "[QCmdOptions::run] URL: " << serverUrl;
+  const QString &passwd = env.value("MY_PASS", "<password>");
+  const QString &serverAddress = env.value("MY_ADDR", "exchange-server.com");
+  QUrl serverUrl;
+  serverUrl.setScheme("https");
+  serverUrl.setHost(serverAddress);
+  serverUrl.setPort(serverPort.toInt());
+  serverUrl.setPath("/Microsoft-Server-ActiveSync");
+  qDebug() << "[QCmdOptions::run] Request URL: " << serverUrl.toString();
 
-    QNetworkRequest request(serverUrl);
-//    request.setHeader(QNetworkRequest::UserAgentHeader, "curl/7.35.0");
-//    request.setRawHeader("Host", "mobile.ur.ch:443");
-    request.setRawHeader("Proxy-Connection", "Keep-Alive");
-    QSslConfiguration sslConfig = QSslConfiguration::defaultConfiguration();
-    sslConfig.setPeerVerifyMode(QSslSocket::VerifyNone);
-    request.setSslConfiguration(sslConfig);
-
-//  connect(&mManager, &QNetworkAccessManager::finished,
-//          this, &QCmdBase::onRequestReady);
-//  connect(&mManager, &QNetworkAccessManager::authenticationRequired,
-//          this, &QCmdBase::authentication);
+  QNetworkRequest request;
+  request.setUrl(serverUrl);
+  request.setRawHeader("Connection", "Keep-Alive");
+  request.setRawHeader("Host", serverAddress.toUtf8());
+  const QByteArray &creds = QString("%1:%2").arg(userId).arg(passwd).toUtf8().toBase64();
+  const QByteArray &authHeader = QString("Basic %1").arg(creds.constData()).toUtf8();
+  request.setRawHeader("Authorization", authHeader);
 
   mReply = mManager.sendCustomRequest(request, "OPTIONS");
-//  connect(mReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SIGNAL(finished()));
-//  connect(mReply, &QNetworkReply::finished, this, &QCmdOptions::finished);
-//  connect(mReply, &QNetworkReply::sslErrors, this, &QCmdOptions::finished);
-//    connect(mReply, SIGNAL(finished()), this, SLOT(onOptionsRequestReady()));
-//    connect(mReply, SIGNAL(sslErrors(QList<QSslError>)), this, SLOT(onSslErrors(QList<QSslError>)));
+  connect(mReply, &QNetworkReply::finished, this, &QCmdOptions::onRequestFinished);
+}
 
-//  emit finished();
-  exec();
+void QCmdOptions::onRequestFinished()
+{
+  assert(mReply);
+
+  if (QNetworkReply::NoError == mReply->error()) {
+    const QByteArray &protoVersions = mReply->rawHeader("MS-ASProtocolVersions");
+    const QByteArray &protoCommands = mReply->rawHeader("MS-ASProtocolCommands");
+    qDebug() << "--- Supported protocol versions:" << protoVersions;
+    qDebug() << "--- Supported protocol commands:" << protoCommands;
+  } else {
+    qDebug() << "--- Finished with error:" << mReply->error();
+  }
+
+  emit done();
 }
