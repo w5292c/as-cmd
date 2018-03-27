@@ -9,6 +9,7 @@ class QNetworkManager : public QObject
 public:
   static void init(QObject *parent);
   static QNetworkManager &instance();
+   ~QNetworkManager() Q_DECL_OVERRIDE;
 
   inline QNetworkAccessManager &manager() { return mManager; }
 

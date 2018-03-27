@@ -1,11 +1,16 @@
 #include "cmd-unknown.h"
 
+#include "as-debug.h"
 #include "cmd-help.h"
-
-#include <QDebug>
 
 QCmdUnknown::QCmdUnknown()
 {
+  qVerbose(<< "[QCmdUnknown::QCmdUnknown]" << this);
+}
+
+QCmdUnknown::~QCmdUnknown()
+{
+  qVerbose(<< "[QCmdUnknown::~QCmdUnknown]" << this);
 }
 
 void QCmdUnknown::process()

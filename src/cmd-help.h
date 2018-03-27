@@ -9,6 +9,7 @@ class QCmdHelp : public QCmdBase
 
 public:
   QCmdHelp();
+  ~QCmdHelp() Q_DECL_OVERRIDE;
 
 protected:
   void process() Q_DECL_OVERRIDE;

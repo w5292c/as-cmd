@@ -1,11 +1,12 @@
 #include "cmd-controller.h"
 
+#include "as-debug.h"
 #include "cmd-help.h"
 #include "cmd-options.h"
 #include "cmd-unknown.h"
+#include "cmd-verbose.h"
 #include "rl-controller.h"
 
-#include <QDebug>
 #include <history.h>
 #include <readline.h>
 
@@ -13,6 +14,12 @@
 
 QCmdController::QCmdController(QRlController *rl) : mRlController(rl)
 {
+  qVerbose(<< "[QCmdController::QCmdController]" << this);
+}
+
+QCmdController::~QCmdController()
+{
+  qVerbose(<< "[QCmdController::~QCmdController]" << this);
 }
 
 void QCmdController::onCommand(const QString &cmd)
@@ -23,6 +30,11 @@ void QCmdController::onCommand(const QString &cmd)
     command = new QCmdHelp();
   } else if (cmd == "options") {
     command = new QCmdOptions();
+  } else if (cmd == "verbose") {
+    command = new QCmdVerbose(true);
+  } else if (cmd.startsWith("verbose ")) {
+    const bool on = (cmd.mid(8) == "on");
+    command = new QCmdVerbose(false, on);
   } else {
     command = new QCmdUnknown();
   }

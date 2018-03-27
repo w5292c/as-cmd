@@ -9,6 +9,7 @@ class QCmdUnknown : public QCmdBase
 
 public:
   QCmdUnknown();
+  ~QCmdUnknown() Q_DECL_OVERRIDE;
 
 protected:
   void process() Q_DECL_OVERRIDE;

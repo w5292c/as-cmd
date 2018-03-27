@@ -1,5 +1,7 @@
 #include "rl-controller.h"
 
+#include "as-debug.h"
+
 #include <history.h>
 #include <readline.h>
 
@@ -7,6 +9,12 @@
 
 QRlController::QRlController()
 {
+  qVerbose(<< "[QRlController::QRlController]" << this);
+}
+
+QRlController::~QRlController()
+{
+  qVerbose(<< "[QRlController::~QRlController]" << this);
 }
 
 void QRlController::run()

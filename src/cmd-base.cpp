@@ -1,11 +1,15 @@
 #include "cmd-base.h"
 
+#include "as-debug.h"
+
 #include <QNetworkReply>
 #include <QAuthenticator>
 #include <QProcessEnvironment>
 
 QCmdBase::QCmdBase()
 {
+  qVerbose(<< "[QCmdBase::QCmdBase]" << this);
+
   mManager.moveToThread(this);
   mManager.clearAccessCache();
 
@@ -17,13 +21,16 @@ QCmdBase::QCmdBase()
 
 QCmdBase::~QCmdBase()
 {
+  qVerbose(<< "[QCmdBase::~QCmdBase]" << this);
 }
 
 void QCmdBase::run()
 {
   process();
 
+  qVerbose(<< "[QCmdBase::run] Enter the event loop");
   exec();
+  qVerbose(<< "[QCmdBase::run] Done with the event loop");
 }
 
 void QCmdBase::authentication(QNetworkReply *reply, QAuthenticator *authenticator)

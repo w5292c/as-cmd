@@ -12,20 +12,24 @@ LIBS += -lreadline
 INCLUDEPATH += /usr/include/readline
 
 HEADERS=\
+  as-env.h \
   cmd-base.h \
   cmd-help.h \
   cmd-options.h \
   cmd-unknown.h \
+  cmd-verbose.h \
   rl-controller.h \
   cmd-controller.h \
   network-manager.h
 
 SOURCES=\
   main.cpp \
+  as-env.cpp \
   cmd-base.cpp \
   cmd-help.cpp \
   cmd-options.cpp \
   cmd-unknown.cpp \
+  cmd-verbose.cpp \
   rl-controller.cpp \
   cmd-controller.cpp \
   network-manager.cpp

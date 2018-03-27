@@ -1,5 +1,6 @@
 #include "cmd-options.h"
 
+#include "as-debug.h"
 #include "network-manager.h"
 
 #include <QUrl>
@@ -13,10 +14,12 @@
 QCmdOptions::QCmdOptions() :
   mReply(NULL)
 {
+  qVerbose(<< "[QCmdOptions::QCmdOptions]" << this);
 }
 
 QCmdOptions::~QCmdOptions()
 {
+  qVerbose(<< "[QCmdOptions::~QCmdOptions]" << this);
 }
 
 void QCmdOptions::process()
@@ -37,7 +40,7 @@ void QCmdOptions::process()
   serverUrl.setHost(serverAddress);
   serverUrl.setPort(serverPort.toInt());
   serverUrl.setPath("/Microsoft-Server-ActiveSync");
-  qDebug() << "[QCmdOptions::run] Request URL: " << serverUrl.toString();
+  qVerbose(<< "[QCmdOptions::run] Request URL: " << serverUrl.toString());
 
   QNetworkRequest request;
   request.setUrl(serverUrl);

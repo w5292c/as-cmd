@@ -1,21 +1,29 @@
 #include "network-manager.h"
 
+#include "as-debug.h"
+
 #include <assert.h>
 
-static QNetworkManager *object = NULL;
+static QNetworkManager *TheNetworkManager = NULL;
 
 void QNetworkManager::init(QObject *parent)
 {
-  assert(!object);
-  object = new QNetworkManager(parent);
+  assert(!TheNetworkManager);
+  TheNetworkManager = new QNetworkManager(parent);
 }
 
 QNetworkManager &QNetworkManager::instance()
 {
-  assert(object);
-  return *object;
+  assert(TheNetworkManager);
+  return *TheNetworkManager;
 }
 
 QNetworkManager::QNetworkManager(QObject *parent) : QObject(parent)
 {
+  qVerbose(<< "[QNetworkManager::QNetworkManager]" << this);
+}
+
+QNetworkManager::~QNetworkManager()
+{
+  qVerbose(<< "[QNetworkManager::~QNetworkManager]" << this);
 }

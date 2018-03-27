@@ -10,7 +10,7 @@ class QCmdBase : public QThread
 
 public:
   QCmdBase();
-  ~QCmdBase();
+  ~QCmdBase() Q_DECL_OVERRIDE;
 
 public slots:
   void authentication(QNetworkReply *reply, QAuthenticator *authenticator);

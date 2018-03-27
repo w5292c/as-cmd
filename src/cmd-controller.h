@@ -10,6 +10,7 @@ class QCmdController : public QObject
 
 public:
   QCmdController(QRlController *rl);
+  ~QCmdController() Q_DECL_OVERRIDE;
 
 public slots:
   void onCommand(const QString &cmd);

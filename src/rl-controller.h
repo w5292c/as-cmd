@@ -9,6 +9,7 @@ class QRlController : public QThread
 
 public:
   QRlController();
+  ~QRlController() Q_DECL_OVERRIDE;
 
 public slots:
   void onCommandDone();
