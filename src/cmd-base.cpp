@@ -83,5 +83,15 @@ void QCmdBase::dumpWbXml(const QByteArray &wbxml)
     &pXml, &xmlLength,
     &params);
   qDebug("WBXML Dump, convertion result: %d, length: %d:", wbres, xmlLength);
-  qDebug() << (const char *)pXml;
+  if (!wbres) {
+    for (int i = 0; i < xmlLength; ++i) {
+      if (!pXml[i]) {
+        pXml[i] = '?';
+      }
+    }
+    qDebug() << (const char *)pXml;
+  } else {
+    qDebug() << "Length:" << wbxml.length();
+    qDebug() << wbxml.toHex();
+  }
 }

@@ -25,6 +25,7 @@
 #include "cmd-controller.h"
 
 #include "as-debug.h"
+#include "cmd-sync.h"
 #include "cmd-help.h"
 #include "cmd-prop.h"
 #include "cmd-options.h"
@@ -51,6 +52,8 @@ void QCmdController::onCommand(const QString &cmd)
     command = new QCmdHelp();
   } else if (cmd == "options") {
     command = new QCmdOptions();
+  } else if (cmd == "sync") {
+    command = new QCmdSync();
   } else if (cmd == "folder-sync") {
     command = new QCmdFolderSync();
   } else if (cmd == "verbose") {
