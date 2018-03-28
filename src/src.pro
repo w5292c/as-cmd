@@ -41,12 +41,10 @@ HEADERS=\
   cmd-options.h \
   cmd-unknown.h \
   cmd-verbose.h \
-  cmd-sync-key.h \
   rl-controller.h \
   cmd-controller.h \
   network-manager.h \
-  cmd-folder-sync.h \
-  cmd-collection-id.h
+  cmd-folder-sync.h
 
 SOURCES=\
   main.cpp \
@@ -57,9 +55,7 @@ SOURCES=\
   cmd-options.cpp \
   cmd-unknown.cpp \
   cmd-verbose.cpp \
-  cmd-sync-key.cpp \
   rl-controller.cpp \
   cmd-controller.cpp \
   network-manager.cpp \
-  cmd-folder-sync.cpp \
-  cmd-collection-id.cpp
+  cmd-folder-sync.cpp

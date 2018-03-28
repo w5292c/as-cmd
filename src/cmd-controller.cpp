@@ -30,15 +30,8 @@
 #include "cmd-options.h"
 #include "cmd-unknown.h"
 #include "cmd-verbose.h"
-#include "cmd-sync-key.h"
 #include "rl-controller.h"
 #include "cmd-folder-sync.h"
-#include "cmd-collection-id.h"
-
-#include <history.h>
-#include <readline.h>
-
-#define AS_CMD_PROMPT "AS >>> "
 
 QCmdController::QCmdController(QRlController *rl) : mRlController(rl)
 {
@@ -65,16 +58,6 @@ void QCmdController::onCommand(const QString &cmd)
   } else if (cmd.startsWith("verbose ")) {
     const bool on = (cmd.mid(8) == "on");
     command = new QCmdVerbose(false, on);
-  } else if (cmd == "sync-key") {
-    command = new QCmdSyncKey(true);
-  } else if (cmd.startsWith("sync-key ")) {
-    const int value = cmd.mid(9).toInt();
-    command = new QCmdSyncKey(false, value);
-  } else if (cmd == "collection-id") {
-    command = new QCmdCollectionId(true);
-  } else if (cmd.startsWith("collection-id ")) {
-    const int value = cmd.mid(14).toInt();
-    command = new QCmdCollectionId(false, value);
   } else if (cmd == "props") {
     command = new QCmdProp(true);
   } else if (cmd.startsWith("set ") || cmd.startsWith("get ")) {
