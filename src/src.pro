@@ -37,6 +37,7 @@ HEADERS=\
   as-env.h \
   cmd-base.h \
   cmd-help.h \
+  cmd-prop.h \
   cmd-options.h \
   cmd-unknown.h \
   cmd-verbose.h \
@@ -52,6 +53,7 @@ SOURCES=\
   as-env.cpp \
   cmd-base.cpp \
   cmd-help.cpp \
+  cmd-prop.cpp \
   cmd-options.cpp \
   cmd-unknown.cpp \
   cmd-verbose.cpp \

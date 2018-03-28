@@ -26,6 +26,7 @@
 
 #include "as-debug.h"
 #include "cmd-help.h"
+#include "cmd-prop.h"
 #include "cmd-options.h"
 #include "cmd-unknown.h"
 #include "cmd-verbose.h"
@@ -74,14 +75,27 @@ void QCmdController::onCommand(const QString &cmd)
   } else if (cmd.startsWith("collection-id ")) {
     const int value = cmd.mid(14).toInt();
     command = new QCmdCollectionId(false, value);
-  } else {
+  } else if (cmd == "props") {
+    command = new QCmdProp(true);
+  } else if (cmd.startsWith("set ") || cmd.startsWith("get ")) {
+    const QString &args = cmd.mid(4);
+    if (cmd.startsWith("get ")) {
+      command = new QCmdProp(false, args);
+    } else {
+      const int nameEndIndex = args.indexOf(' ');
+      if (-1 != nameEndIndex) {
+        const QString &name = args.mid(0, nameEndIndex);
+        const QString &value = args.mid(nameEndIndex + 1);
+        command = new QCmdProp(false, name, false, value);
+        qDebug() << name << value;
+      }
+    }
+  }
+
+  if (!command) {
     command = new QCmdUnknown();
   }
 
-  if (command) {
-    connect(command, &QCmdBase::finished, mRlController, &QRlController::onCommandDone);
-    command->start();
-  } else {
-    qDebug("Here is the unknown user input: \"%s\"", qUtf8Printable(cmd));
-  }
+  connect(command, &QCmdBase::finished, mRlController, &QRlController::onCommandDone);
+  command->start();
 }

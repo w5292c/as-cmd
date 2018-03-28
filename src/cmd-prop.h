@@ -22,30 +22,28 @@
  * SOFTWARE.
  */
 
-#include "cmd-help.h"
+#ifndef CMD_PROP_H
+#define CMD_PROP_H
 
-#include "as-debug.h"
+#include <cmd-base.h>
 
-QCmdHelp::QCmdHelp()
+class QCmdProp : public QCmdBase
 {
-  qVerbose(<< "[QCmdHelp::QCmdHelp]" << this);
-}
+  Q_OBJECT
 
-QCmdHelp::~QCmdHelp()
-{
-  qVerbose(<< "[QCmdHelp::~QCmdHelp]" << this);
-}
+public:
+  QCmdProp(bool showList, const QString &name = QString(),
+           bool show = true, const QString &value = QString());
+  ~QCmdProp() Q_DECL_OVERRIDE;
 
-void QCmdHelp::process()
-{
-  qDebug() << ">>> help - Show help";
-  qDebug() << ">>> exit - Exit the application";
-  qDebug() << ">>> verbose [<on>|<off>] - Show or enable/disable verbose output";
-  qDebug() << ">>> options - Send 'OPTIONS' request";
-  qDebug() << ">>> folder-sync - Send FolderSync command";
-  qDebug() << ">>> get <name> - Get the value of property <name>";
-  qDebug() << ">>> set <name> <value> - Set property <name> to <value>";
-  qDebug() << ">>> props - Show the names of the currenltly existing properties";
+protected:
+  void process() Q_DECL_OVERRIDE;
 
-  emit done();
-}
+private:
+  bool mShow;
+  bool mShowList;
+  QString mName;
+  QString mValue;
+};
+
+#endif /* CMD_PROP_H */

@@ -50,7 +50,9 @@ QAsEnvironment::QAsEnvironment(QObject *parent) :
   mSyncKey(0),
   mCollectionId(0)
 {
-  qVerbose(<< "[QAsEnvironment::QAsEnvironment]" << TheAsEnvironment);
+  setObjectName("QAsEnvironment");
+
+  qVerbose(<< "[QAsEnvironment::QAsEnvironment]" << this);
 }
 
 QAsEnvironment::~QAsEnvironment()

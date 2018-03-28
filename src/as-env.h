@@ -30,6 +30,8 @@
 class QAsEnvironment : public QObject
 {
   Q_OBJECT
+  Q_PROPERTY(int syncKey READ syncKey WRITE setSyncKey)
+  Q_PROPERTY(int collectionId READ collectionId WRITE setCollectionId)
 
 public:
   ~QAsEnvironment() Q_DECL_OVERRIDE;
