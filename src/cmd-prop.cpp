@@ -68,8 +68,8 @@ void QCmdProp::process()
     QVariant value;
     if (ok) {
       value = QVariant(intValue);
-    } else if (mValue == "true" || mValue == "false") {
-      value = QVariant((mValue == "true") ? true : false);
+    } else if (mValue == "true" || mValue == "false" || mValue == "on" || mValue == "off") {
+      value = QVariant((mValue == "true" || mValue == "on") ? true : false);
     } else if (!mValue.isNull()) {
       // Empty value
       value = mValue;
