@@ -154,7 +154,7 @@ void QCmdSync::onRequestFinished()
 
   if (QNetworkReply::NoError == mReply->error()) {
     const QByteArray &reply = mReply->readAll();
-    qDebug() << "Headers:" << mReply->rawHeaderPairs();
+    qVerbose(<< "Headers:" << mReply->rawHeaderPairs());
     dumpWbXml(reply);
   } else {
     qDebug() << "--- Finished with error:" << mReply->error();

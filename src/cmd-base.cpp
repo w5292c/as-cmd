@@ -76,15 +76,15 @@ void QCmdBase::dumpWbXml(const QByteArray &wbxml)
   params.lang = WBXML_LANG_AIRSYNC;
   params.indent = 0;
   params.keep_ignorable_ws = TRUE;
-  WB_ULONG xmlLength = 2;
   WB_UTINY *pXml = NULL;
+  WB_ULONG xmlLength = 0;
   const WBXMLError wbres = wbxml_conv_wbxml2xml_withlen(
     (unsigned char *)wbxml.constData(), wbxml.length(),
     &pXml, &xmlLength,
     &params);
   qDebug("WBXML Dump, convertion result: %d, length: %d:", wbres, xmlLength);
   if (!wbres) {
-    for (int i = 0; i < xmlLength; ++i) {
+    for (WB_ULONG i = 0; i < xmlLength; ++i) {
       if (!pXml[i]) {
         pXml[i] = '?';
       }
