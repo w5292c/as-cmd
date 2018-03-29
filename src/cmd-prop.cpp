@@ -56,8 +56,7 @@ void QCmdProp::process()
     propNames.append(QAsEnvironment::instance().dynamicPropertyNames());
 
     qDebug() << "Properties:" << propNames;
-  }
-  else if (mShow) {
+  } else if (mShow) {
     qDebug() << "[" << mName << "]:" << QAsEnvironment::instance().property(mName.toUtf8());
   } else {
     const QByteArray &key = mName.toUtf8();
@@ -71,7 +70,8 @@ void QCmdProp::process()
       value = QVariant(intValue);
     } else if (mValue == "true" || mValue == "false") {
       value = QVariant((mValue == "true") ? true : false);
-    } else {
+    } else if (!mValue.isNull()) {
+      // Empty value
       value = mValue;
     }
     qVerbose(<< "New value:" << value);

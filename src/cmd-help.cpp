@@ -44,7 +44,9 @@ void QCmdHelp::process()
   qDebug() << ">>> options - Send 'OPTIONS' request";
   qDebug() << ">>> folder-sync - Send FolderSync command";
   qDebug() << ">>> get <name> - Get the value of property <name>";
-  qDebug() << ">>> set <name> <value> - Set property <name> to <value>";
+  qDebug() << ">>> set <name> - Remove property <name>";
+  qDebug() << ">>> set <name> <value> - Sete property <name> to <value>";
+  qDebug() << ">>> set <name>< > - Set property <name> to empty string";
   qDebug() << ">>> props - Show the names of the currenltly existing properties";
 
   emit done();

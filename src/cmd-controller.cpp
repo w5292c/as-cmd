@@ -73,7 +73,8 @@ void QCmdController::onCommand(const QString &cmd)
         const QString &name = args.mid(0, nameEndIndex);
         const QString &value = args.mid(nameEndIndex + 1);
         command = new QCmdProp(false, name, false, value);
-        qDebug() << name << value;
+      } else {
+        command = new QCmdProp(false, args, false, QString::null);
       }
     }
   }
