@@ -26,10 +26,12 @@ QT -= gui
 QT += core
 QT += network
 
+CONFIG += c++11
 CONFIG += link_pkgconfig
 
 PKGCONFIG += libwbxml2 libxml-2.0
 
+QMAKE_CXXFLAGS += -pedantic
 LIBS += -lreadline
 INCLUDEPATH += /usr/include/readline
 
