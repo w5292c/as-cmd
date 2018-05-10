@@ -48,6 +48,7 @@ void QCmdHelp::process()
   qDebug() << ">>> set <name> <value> - Sete property <name> to <value>";
   qDebug() << ">>> set <name>< > - Set property <name> to empty string";
   qDebug() << ">>> props - Show the names of the currenltly existing properties";
+  qDebug() << ">>> sync ('syncKey', 'collectionId', 'windowSize', 'deletesAsMoves', 'getChanges') - Send 'sync' command with parameters";
 
   emit done();
 }
