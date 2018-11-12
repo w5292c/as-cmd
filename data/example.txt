@@ -1,0 +1,3 @@
+This is a text with example plain text body of email
+with serveral lines of text. This can be used to check
+S/MIME handling.

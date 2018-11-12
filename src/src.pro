@@ -29,7 +29,7 @@ QT += network
 CONFIG += c++11
 CONFIG += link_pkgconfig
 
-PKGCONFIG += libwbxml2 libxml-2.0
+PKGCONFIG += libwbxml2 libxml-2.0 libcrypto
 
 QMAKE_CXXFLAGS += -pedantic
 LIBS += -lreadline
@@ -40,6 +40,7 @@ HEADERS=\
   cmd-base.h \
   cmd-help.h \
   cmd-prop.h \
+  cmd-sign.h \
   cmd-sync.h \
   cmd-options.h \
   cmd-unknown.h \
@@ -55,6 +56,7 @@ SOURCES=\
   cmd-base.cpp \
   cmd-help.cpp \
   cmd-prop.cpp \
+  cmd-sign.cpp \
   cmd-sync.cpp \
   cmd-options.cpp \
   cmd-unknown.cpp \

@@ -48,7 +48,9 @@ QAsEnvironment &QAsEnvironment::instance()
 QAsEnvironment::QAsEnvironment(QObject *parent) :
   QObject(parent),
   mSyncKey(0),
-  mCollectionId(0)
+  mCollectionId(0),
+  mFilename("../data/example.txt"),
+  mRsaFilename("../data/rsa.pem")
 {
   setObjectName("QAsEnvironment");
 
@@ -88,4 +90,24 @@ int QAsEnvironment::collectionId() const
 void QAsEnvironment::setCollectionId(int value)
 {
   mCollectionId = value;
+}
+
+QString QAsEnvironment::rsa() const
+{
+  return mRsaFilename;
+}
+
+void QAsEnvironment::setRsa(const QString &rsa)
+{
+  mRsaFilename = rsa;
+}
+
+QString QAsEnvironment::filename() const
+{
+  return mFilename;
+}
+
+void QAsEnvironment::setFilename(const QString &filename)
+{
+  mFilename = filename;
 }

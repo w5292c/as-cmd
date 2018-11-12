@@ -25,6 +25,7 @@
 #include "cmd-controller.h"
 
 #include "as-debug.h"
+#include "cmd-sign.h"
 #include "cmd-sync.h"
 #include "cmd-help.h"
 #include "cmd-prop.h"
@@ -52,6 +53,8 @@ void QCmdController::onCommand(const QString &cmd)
     command = new QCmdHelp();
   } else if (cmd == "options") {
     command = new QCmdOptions();
+  } else if (cmd == "sign") {
+    command = new QCmdSign();
   } else if (cmd == "sync") {
     command = new QCmdSync();
   } else if (cmd == "folder-sync") {

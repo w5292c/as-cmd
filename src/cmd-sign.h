@@ -22,34 +22,21 @@
  * SOFTWARE.
  */
 
-#include "cmd-help.h"
+#ifndef CMD_SIGN_H
+#define CMD_SIGN_H
 
-#include "as-debug.h"
+#include <cmd-base.h>
 
-QCmdHelp::QCmdHelp()
+class QCmdSign : public QCmdBase
 {
-  qVerbose(<< "[QCmdHelp::QCmdHelp]" << this);
-}
+  Q_OBJECT
 
-QCmdHelp::~QCmdHelp()
-{
-  qVerbose(<< "[QCmdHelp::~QCmdHelp]" << this);
-}
+public:
+  QCmdSign();
+  ~QCmdSign() Q_DECL_OVERRIDE;
 
-void QCmdHelp::process()
-{
-  qDebug() << ">>> help - Show help";
-  qDebug() << ">>> exit - Exit the application";
-  qDebug() << ">>> verbose [<on>|<off>] - Show or enable/disable verbose output";
-  qDebug() << ">>> options - Send 'OPTIONS' request";
-  qDebug() << ">>> folder-sync - Send FolderSync command";
-  qDebug() << ">>> get <name> - Get the value of property <name>";
-  qDebug() << ">>> set <name> - Remove property <name>";
-  qDebug() << ">>> set <name> <value> - Sete property <name> to <value>";
-  qDebug() << ">>> set <name>< > - Set property <name> to empty string";
-  qDebug() << ">>> props - Show the names of the currenltly existing properties";
-  qDebug() << ">>> sign ('filename', 'rsa') - Calculate signature for a plain text file 'filename' and RSA key in 'rsa'";
-  qDebug() << ">>> sync ('syncKey', 'collectionId', 'windowSize', 'deletesAsMoves', 'getChanges') - Send 'sync' command with parameters";
+protected:
+  void process() Q_DECL_OVERRIDE;
+};
 
-  emit done();
-}
+#endif /* CMD_SIGN_H */
