@@ -22,35 +22,21 @@
  * SOFTWARE.
  */
 
-#include "cmd-help.h"
+#include "cmd-test.h"
 
 #include "as-debug.h"
 
-QCmdHelp::QCmdHelp()
+QCmdTest::QCmdTest()
 {
-  qVerbose(<< "[QCmdHelp::QCmdHelp]" << this);
+  qVerbose(<< "[QCmdTest::QCmdTest]" << this);
 }
 
-QCmdHelp::~QCmdHelp()
+QCmdTest::~QCmdTest()
 {
-  qVerbose(<< "[QCmdHelp::~QCmdHelp]" << this);
+  qVerbose(<< "[QCmdTest::~QCmdTest]" << this);
 }
 
-void QCmdHelp::process()
+void QCmdTest::process()
 {
-  qDebug() << ">>> help - Show help";
-  qDebug() << ">>> exit - Exit the application";
-  qDebug() << ">>> verbose [<on>|<off>] - Show or enable/disable verbose output";
-  qDebug() << ">>> test - Start test (maybe temporary) code";
-  qDebug() << ">>> options - Send 'OPTIONS' request";
-  qDebug() << ">>> folder-sync - Send FolderSync command";
-  qDebug() << ">>> get <name> - Get the value of property <name>";
-  qDebug() << ">>> set <name> - Remove property <name>";
-  qDebug() << ">>> set <name> <value> - Sete property <name> to <value>";
-  qDebug() << ">>> set <name>< > - Set property <name> to empty string";
-  qDebug() << ">>> props - Show the names of the currenltly existing properties";
-  qDebug() << ">>> sign ('filename', 'rsa') - Calculate signature for a plain text file 'filename' and RSA key in 'rsa'";
-  qDebug() << ">>> sync ('syncKey', 'collectionId', 'windowSize', 'deletesAsMoves', 'getChanges') - Send 'sync' command with parameters";
-
   emit done();
 }

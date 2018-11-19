@@ -29,6 +29,7 @@
 #include "cmd-sync.h"
 #include "cmd-help.h"
 #include "cmd-prop.h"
+#include "cmd-test.h"
 #include "cmd-options.h"
 #include "cmd-unknown.h"
 #include "cmd-verbose.h"
@@ -80,6 +81,8 @@ void QCmdController::onCommand(const QString &cmd)
         command = new QCmdProp(false, args, false, QString::null);
       }
     }
+  } else if (cmd == "test") {
+    command = new QCmdTest();
   }
 
   if (!command) {

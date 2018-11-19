@@ -42,6 +42,7 @@ HEADERS=\
   cmd-prop.h \
   cmd-sign.h \
   cmd-sync.h \
+  cmd-test.h \
   cmd-options.h \
   cmd-unknown.h \
   cmd-verbose.h \
@@ -58,6 +59,7 @@ SOURCES=\
   cmd-prop.cpp \
   cmd-sign.cpp \
   cmd-sync.cpp \
+  cmd-test.cpp \
   cmd-options.cpp \
   cmd-unknown.cpp \
   cmd-verbose.cpp \
