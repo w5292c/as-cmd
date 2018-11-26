@@ -1,0 +1,6 @@
+Hello, Name,
+Hi, it's a simple test of S/MIME functionality
+
+---
+Regards,
+Alexander

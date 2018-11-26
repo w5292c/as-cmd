@@ -50,6 +50,7 @@ void QCmdHelp::process()
   qDebug() << ">>> set <name>< > - Set property <name> to empty string";
   qDebug() << ">>> props - Show the names of the currenltly existing properties";
   qDebug() << ">>> sign ('filename', 'rsa') - Calculate signature for a plain text file 'filename' and RSA key in 'rsa'";
+  qDebug() << ">>> verify - Verify the signed file";
   qDebug() << ">>> sync ('syncKey', 'collectionId', 'windowSize', 'deletesAsMoves', 'getChanges') - Send 'sync' command with parameters";
 
   emit done();

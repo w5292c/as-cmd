@@ -30,6 +30,7 @@
 #include "cmd-help.h"
 #include "cmd-prop.h"
 #include "cmd-test.h"
+#include "cmd-verify.h"
 #include "cmd-options.h"
 #include "cmd-unknown.h"
 #include "cmd-verbose.h"
@@ -67,6 +68,8 @@ void QCmdController::onCommand(const QString &cmd)
     command = new QCmdVerbose(false, on);
   } else if (cmd == "props") {
     command = new QCmdProp(true);
+  } else if (cmd == "verify") {
+    command = new QCmdVerify();
   } else if (cmd.startsWith("set ") || cmd.startsWith("get ")) {
     const QString &args = cmd.mid(4);
     if (cmd.startsWith("get ")) {
