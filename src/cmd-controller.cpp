@@ -36,6 +36,7 @@
 #include "cmd-verbose.h"
 #include "rl-controller.h"
 #include "cmd-folder-sync.h"
+#include "cmd-verify-mime.h"
 
 QCmdController::QCmdController(QRlController *rl) : mRlController(rl)
 {
@@ -70,6 +71,8 @@ void QCmdController::onCommand(const QString &cmd)
     command = new QCmdProp(true);
   } else if (cmd == "verify") {
     command = new QCmdVerify();
+  } else if (cmd == "verify-mime") {
+    command = new QCmdVerifyMime();
   } else if (cmd.startsWith("set ") || cmd.startsWith("get ")) {
     const QString &args = cmd.mid(4);
     if (cmd.startsWith("get ")) {

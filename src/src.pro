@@ -50,7 +50,8 @@ HEADERS=\
   rl-controller.h \
   cmd-controller.h \
   network-manager.h \
-  cmd-folder-sync.h
+  cmd-folder-sync.h \
+  cmd-verify-mime.h
 
 SOURCES=\
   main.cpp \
@@ -68,4 +69,5 @@ SOURCES=\
   rl-controller.cpp \
   cmd-controller.cpp \
   network-manager.cpp \
-  cmd-folder-sync.cpp
+  cmd-folder-sync.cpp \
+  cmd-verify-mime.cpp
